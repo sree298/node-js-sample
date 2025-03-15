@@ -6,11 +6,11 @@ spec:
   replicas: 2
   selector:
     matchLabels:
-      app: node-js
+      app: node-js1
   template:
     metadata:
       labels:
-        app: node-js
+        app: node-js1
     spec:
       containers:
       - name: node-js
@@ -30,7 +30,7 @@ metadata:
 spec:
   type: NodePort
   selector:
-    app: node-js  # Updated to match the deployment's labels
+    app: node-js1  # Updated to match the deployment's labels
   ports:
     - port: 5000          # The port that the service will expose
       targetPort: 5000    # The port on the container
