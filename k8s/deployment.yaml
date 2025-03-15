@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: node-js
-        image: sandippatil290/node-js-sample:1.0
+        image: sandip9292/node-js-sample:1.0
         volumeMounts:
         - name: node-js-storage
           mountPath: /usr/src/app/data
