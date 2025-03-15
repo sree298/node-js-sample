@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKER_IMAGE = 'sandippatil290/node-js-sample:1.0' // Replace with your Docker Hub username
+        DOCKER_IMAGE = 'sandip9292/node-js-sample:1.0' // Replace with your Docker Hub username
         PATH = "/usr/local/bin:$PATH" 
     }
     stages {
@@ -32,7 +32,7 @@ pipeline {
                         sh "echo ${DOCKER_PASSWORD} | docker login -u ${DOCKER_USERNAME} --password-stdin"
                         // Push the Docker image to Docker Hub
                         //sh "docker tag sandippatil290/node-js-sample:1.0"
-                        sh "docker push sandippatil290/node-js-sample:1.0"
+                        sh "docker push sandip9292/node-js-sample:1.0"
                     } // Closing brace for withCredentials
                 } // Closing brace for script
             } // Closing brace for steps
