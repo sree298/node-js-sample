@@ -1,13 +1,12 @@
 pipeline {
     agent any
     environment {
-        DOCKER_IMAGE = 'sandip9292/node-js-sample:1.0' // Replace with your Docker Hub username
         PATH = "/usr/local/bin:$PATH" 
     }
     stages {
         stage('Clone Repository') {
             steps {
-                cleanWs()
+                //cleanWs()
                 // Clone the Git repository
                 git credentialsId: 'git-credentials', url: 'https://github.com/zendesk/node-js-sample.git', branch: 'main' // Replace with your Git repository
                 sh 'echo $?'
@@ -31,12 +30,11 @@ pipeline {
                         // Log in to Docker Hub using username and password
                         sh "echo ${DOCKER_PASSWORD} | docker login -u ${DOCKER_USERNAME} --password-stdin"
                         // Push the Docker image to Docker Hub
-                        //sh "docker tag sandippatil290/node-js-sample:1.0"
                         sh "docker push sandip9292/node-js-sample:1.0"
-                    } // Closing brace for withCredentials
-                } // Closing brace for script
-            } // Closing brace for steps
-        } // Closing brace for stage
+                    }
+                }
+            }
+        }
         stage('Deploy to Kubernetes') {
             steps {
                 script {
