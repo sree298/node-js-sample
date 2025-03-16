@@ -2,14 +2,12 @@ pipeline {
     agent any
     environment {
         DOCKER_IMAGE = "srinu298/node-js-sample:1.0"
-        PATH = "/usr/local/bin:$PATH" 
+        PATH = "/usr/local/bin:$PATH"
     }
     stages {
         stage('Clone Repository') {
             steps {
-                //cleanWs()
-                // Clone the Git repository
-                git credentialsId: 'git-credentials', url: 'https://github.com/sree298/node-js-sample.git ', branch: 'main' // Replace with your Git repository
+                git credentialsId: 'git-credentials', url: 'https://github.com/sree298/node-js-sample.git', branch: 'main'
                 sh 'echo $?'
                 sh 'echo "successfully cloned"'
             }
@@ -17,9 +15,13 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Build the Docker image
+                    // Check Docker version
                     sh 'docker --version'
-                    sh 'docker build -t ${DOCKER_IMAGE} .'
+                    
+                    // Build the Docker image
+                    sh "docker build -t ${DOCKER_IMAGE} ."
+                    
+                    // List Docker images to verify
                     sh 'docker images'
                 }
             }
@@ -31,7 +33,7 @@ pipeline {
                         // Log in to Docker Hub using username and password
                         sh "echo ${DOCKER_PASSWORD} | docker login -u ${DOCKER_USERNAME} --password-stdin"
                         // Push the Docker image to Docker Hub
-                        sh "docker push srinu298/node-js-sample:1.0"
+                        sh "docker push ${DOCKER_IMAGE}"
                     }
                 }
             }
