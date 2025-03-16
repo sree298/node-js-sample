@@ -90,4 +90,22 @@ For more information about using Node.js on Heroku, see these Dev Center article
     minikube ip
 16. How to access application through browser-
     http://minikubeip:30007
+
+I68QxiWferEhkQOJX6dMNOmP83q9Wi4Af7PC
+mkdir -p ~/.docker/cli-plugins
+curl -L https://github.com/docker/buildx/releases/download/v0.8.0/buildx-v0.8.0.linux-amd64 > ~/.docker/cli-plugins/docker-buildx
+chmod +x ~/.docker/cli-plugins/docker-buildx
+
+sudo vi /etc/docker/daemon.json
+
+{
+  "dns": ["8.8.8.8", "8.8.4.4"]
+}
+
+sudo usermod -aG docker jenkins
+sudo usermod -aG docker jenkins
+sudo systemctl restart jenkins
+kubectl port-forward service/node-js-sample 5000:5000
+127.0.0.1:5000
+
     
