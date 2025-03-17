@@ -91,21 +91,53 @@ For more information about using Node.js on Heroku, see these Dev Center article
 16. How to access application through browser-
     http://minikubeip:30007
 
-I68QxiWferEhkQOJX6dMNOmP83q9Wi4Af7PC
-mkdir -p ~/.docker/cli-plugins
-curl -L https://github.com/docker/buildx/releases/download/v0.8.0/buildx-v0.8.0.linux-amd64 > ~/.docker/cli-plugins/docker-buildx
-chmod +x ~/.docker/cli-plugins/docker-buildx
+17. I68QxiWferEhkQOJX6dMNOmP83q9Wi4Af7PC
+18. mkdir -p ~/.docker/cli-plugins
+19. curl -L https://github.com/docker/buildx/releases/download/v0.8.0/buildx-v0.8.0.linux-amd64 > ~/.docker/cli-plugins/docker-buildx
+20. chmod +x ~/.docker/cli-plugins/docker-buildx
 
-sudo vi /etc/docker/daemon.json
+21. sudo vi /etc/docker/daemon.json
 
 {
   "dns": ["8.8.8.8", "8.8.4.4"]
 }
 
-sudo usermod -aG docker jenkins
-sudo usermod -aG docker jenkins
-sudo systemctl restart jenkins
-kubectl port-forward service/node-js-sample 5000:5000
-127.0.0.1:5000
+22.sudo usermod -aG docker jenkins
+- sudo usermod -aG docker jenkins
+- sudo systemctl restart jenkins
+- kubectl port-forward service/node-js-sample 5000:5000
+- 127.0.0.1:5000
+- ls -l /home/ubuntu/.minikube/profiles/minikube/
+
+- sudo chmod 755 /home/ubuntu
+sudo chmod 755 /home/ubuntu/.minikube
+sudo chmod 755 /home/ubuntu/.minikube/profiles
+sudo chmod 755 /home/ubuntu/.minikube/profiles/minikube
+
+- sudo chown -R jenkins:jenkins /home/ubuntu/.minikube/profiles/minikube/
+sudo chown jenkins:jenkins /home/ubuntu/.minikube/ca.crt
+sudo chown jenkins:jenkins /home/ubuntu/.minikube/profiles/minikube/client.crt
+sudo chown jenkins:jenkins /home/ubuntu/.minikube/profiles/minikube/client.key
+
+
+- sudo chmod 644 /home/ubuntu/.minikube/profiles/minikube/client.crt
+sudo chmod 644 /home/ubuntu/.minikube/profiles/minikube/client.key
+sudo chmod 644 /home/ubuntu/.minikube/ca.crt
+
+
+- sudo -u jenkins cat /home/ubuntu/.minikube/profiles/minikube/client.crt
+sudo -u jenkins cat /home/ubuntu/.minikube/profiles/minikube/client.key
+sudo -u jenkins cat /home/ubuntu/.minikube/ca.crt
+
+
+- sudo usermod -aG docker jenkins
+
+- change port
+vi /etc/default/jenkins
+ps aux | grep jenkins
+sudo kill 14086
+JENKINS_ARGS="--webroot=/var/cache/$NAME/war --httpPort=$HTTP_PORT"
+kubectl delete networkpolicies node-js-network-policy
+https://plugins.jenkins.io/kubernetes-cli/releases/
 
     
