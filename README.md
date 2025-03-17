@@ -135,9 +135,16 @@ sudo -u jenkins cat /home/ubuntu/.minikube/ca.crt
 - change port
 vi /etc/default/jenkins
 ps aux | grep jenkins
-sudo kill 14086
-JENKINS_ARGS="--webroot=/var/cache/$NAME/war --httpPort=$HTTP_PORT"
-kubectl delete networkpolicies node-js-network-policy
-https://plugins.jenkins.io/kubernetes-cli/releases/
+
+- k8s-config in jenkins
+1. \\wsl.localhost\Ubuntu\home\ubuntu\.kube
+2. minikube service node-js-sample --url
+3. sudo kill 14086
+4. JENKINS_ARGS="--webroot=/var/cache/$NAME/war --httpPort=$HTTP_PORT"
+5. kubectl delete networkpolicies node-js-network-policy
+6. https://plugins.jenkins.io/kubernetes-cli/releases/
+- k8s-config in jenkins
+1. \\wsl.localhost\Ubuntu\home\ubuntu\.kube
+2. minikube service node-js-sample --url
 
     
