@@ -7,9 +7,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                //cleanWs()
-                // Clone the Git repository
-                git credentialsId: 'git-credentials', url: 'https://github.com/sree298/node-js-sample.git ', branch: 'main' // Replace with your Git repository
+                git credentialsId: 'git-credentials', url: 'https://github.com/sree298/node-js-sample.git', branch: 'main'
                 sh 'echo $?'
                 sh 'echo "successfully cloned"'
             }
@@ -17,7 +15,6 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Build the Docker image
                     sh 'docker --version'
                     sh 'docker build -t ${DOCKER_IMAGE} .'
                     sh 'docker images'
@@ -28,10 +25,8 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                        // Log in to Docker Hub using username and password
                         sh "echo ${DOCKER_PASSWORD} | docker login -u ${DOCKER_USERNAME} --password-stdin"
-                        // Push the Docker image to Docker Hub
-                        sh "docker push srinu298/node-js-sample:1.0"
+                        sh "docker push ${DOCKER_IMAGE}"
                     }
                 }
             }
@@ -39,10 +34,11 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    // Apply the Kubernetes deployment
-                    sh 'kubectl apply -f k8s/deployment.yaml'
-                    sh 'kubectl apply -f persistent-volume.yaml'
-                    sh 'kubectl apply -f network-policy.yaml'
+                    withCredentials([file(credentialsId: 'k8s-config', variable: 'KUBECONFIG')]) {
+                        sh 'kubectl apply -f k8s/deployment.yaml --kubeconfig=$KUBECONFIG'
+                        sh 'kubectl apply -f persistent-volume.yaml --kubeconfig=$KUBECONFIG'
+                        sh 'kubectl apply -f network-policy.yaml --kubeconfig=$KUBECONFIG'
+                    }
                 }
             }
         }
