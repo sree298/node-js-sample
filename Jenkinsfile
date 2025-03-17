@@ -34,11 +34,11 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    withCredentials([file(credentialsId: 'k8s-config', variable: 'KUBECONFIG')]) {
-                        sh 'kubectl apply -f k8s/deployment.yaml --kubeconfig=$KUBECONFIG'
-                        sh 'kubectl apply -f persistent-volume.yaml --kubeconfig=$KUBECONFIG'
-                        sh 'kubectl apply -f network-policy.yaml --kubeconfig=$KUBECONFIG'
-                    }
+                    sh 'kubectl apply -f k8s/deployment.yaml'
+                    sh 'kubectl apply -f persistent-volume.yaml'
+                    sh 'kubectl apply -f network-policy.yaml'
+                    
+                   
                 }
             }
         }
