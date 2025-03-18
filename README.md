@@ -155,5 +155,7 @@ ps aux | grep jenkins
 2. sudo chown jenkins:jenkins /var/lib/jenkins/.kube/config
 - pipeline name
 1. Node.js-Deployment
+- show labels
+1. kubectl get pods --show-labels
 
     
