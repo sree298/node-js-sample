@@ -153,5 +153,7 @@ ps aux | grep jenkins
 - if not work
 1. sudo cp /home/ubuntu/.kube/config /var/lib/jenkins/.kube/config
 2. sudo chown jenkins:jenkins /var/lib/jenkins/.kube/config
+- pipeline name
+1. Node.js-Deployment
 
     
