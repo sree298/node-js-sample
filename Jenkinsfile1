@@ -3,6 +3,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = "srinu298/node-js-sample:1.0"
         PATH = "/usr/local/bin:$PATH" 
+        KUBECONFIG = '/home/ubuntu/.kube/config' // Define the KUBECONFIG environment variable
     }
     stages {
         stage('Clone Repository') {
@@ -37,8 +38,6 @@ pipeline {
                     sh 'kubectl apply -f k8s/deployment.yaml'
                     sh 'kubectl apply -f persistent-volume.yaml'
                     sh 'kubectl apply -f network-policy.yaml'
-                    
-                   
                 }
             }
         }

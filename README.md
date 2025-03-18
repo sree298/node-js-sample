@@ -146,5 +146,12 @@ ps aux | grep jenkins
 - k8s-config in jenkins
 1. \\wsl.localhost\Ubuntu\home\ubuntu\.kube
 2. minikube service node-js-sample --url
+-ls -l /home/ubuntu/.kube/config
+1. sudo chmod 644 /home/ubuntu/.kube/config
+- if not work
+1. sudo chown jenkins:jenkins /home/ubuntu/.kube/config
+- if not work
+1. sudo cp /home/ubuntu/.kube/config /var/lib/jenkins/.kube/config
+2. sudo chown jenkins:jenkins /var/lib/jenkins/.kube/config
 
     
