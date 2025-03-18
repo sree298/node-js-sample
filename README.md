@@ -157,5 +157,10 @@ ps aux | grep jenkins
 1. Node.js-Deployment
 - show labels
 1. kubectl get pods --show-labels
+should be there
+1. sudo chown -R jenkins:jenkins /home/ubuntu/.kube
+2. sudo chmod 644 /home/ubuntu/.kube/config
+
+
 
     
