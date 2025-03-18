@@ -35,6 +35,7 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
+                    // Apply the Kubernetes deployment
                     sh 'kubectl apply -f k8s/deployment.yaml'
                     sh 'kubectl apply -f persistent-volume.yaml'
                     sh 'kubectl apply -f network-policy.yaml'
