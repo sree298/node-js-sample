@@ -11,6 +11,7 @@ spec:
     metadata:
       labels:
         app: node-js1
+        access: allowed
     spec:
       containers:
       - name: node-js
