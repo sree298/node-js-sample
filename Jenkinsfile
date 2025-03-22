@@ -3,7 +3,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = "srinu298/node-js-sample:1.0"
         PATH = "/usr/local/bin:$PATH" 
-        KUBECONFIG = '/home/ubuntu/.kube/config' // Define the KUBECONFIG environment variable
+        KUBECONFIG = '/home/labuser/.kube/config' // Define the KUBECONFIG environment variable
     }
     stages {
         stage('Clone Repository') {
