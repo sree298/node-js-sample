@@ -160,6 +160,21 @@ ps aux | grep jenkins
 should be there
 1. sudo chown -R jenkins:jenkins /home/ubuntu/.kube
 2. sudo chmod 644 /home/ubuntu/.kube/config
+- lables pod
+1. kubectl label pods node-js-deployment-6956c8f475-22jzl app=node-js access=allowed --overwrite
+- main steps
+1. ubuntu@SRINIVASARAO:~/.kube$ sudo chown -R jenkins:jenkins /home/ubuntu/.kube
+2. ubuntu@SRINIVASARAO:~/.kube$ sudo chown -R jenkins:jenkins /home/ubuntu/.minikube
+3. ubuntu@SRINIVASARAO:~/.kube$ sudo systemctl restart jenkins
+4. sudo chmod 644 /home/ubuntu/.minikube/profiles/minikube/client.key
+5. sudo usermod -aG ubuntu jenkins
+6. sudo chmod -R 755 /home/ubuntu/.minikube
+7. sudo chown -R ubuntu:ubuntu /home/ubuntu/.minikube
+8. sudo usermod -aG ubuntu jenkins
+9. sudo systemctl restart jenkins
+
+
+
 
 
 
